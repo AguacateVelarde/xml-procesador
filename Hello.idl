@@ -1,0 +1,11 @@
+module XmlFinal
+{
+typedef sequence<string> data;
+  interface XMLEstruct
+  {
+  string upload( in string fileName, in string fileString  );
+  data getXML();
+  string getXMLDetail( in string name );
+  oneway void shutdown();
+  };
+};
