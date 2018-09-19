@@ -1,0 +1,10 @@
+start orbd –ORBInitialPort 3400
+
+Server:
+start java -cp ".;C:\Users\server\Desktop\computo\eclipse-workspace\finalXML\src\finalXML\libs\*;C:\xampp\tomcat\lib\*" XMLEstructServer -ORBInitialPort 3400 -ORBInitialHost localhost
+
+Client:
+start java -cp ".;C:\Users\server\Desktop\computo\eclipse-workspace\finalXML\src\finalXML\libs\*;C:\xampp\tomcat\lib\*" client -ORBInitialPort 3400 -ORBInitialHost localhost
+
+compilar:
+javac -classpath ".;C:\Users\server\Desktop\computo\eclipse-workspace\finalXML\src\finalXML\libs\*;C:\xampp\tomcat\lib\*"  *.java XmlFinal/*.java

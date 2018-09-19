@@ -18,7 +18,7 @@ public class SQ
       String myDriver = "org.gjt.mm.mysql.Driver";
       String myUrl = "jdbc:mysql://localhost/distribuido";
       Class.forName(myDriver);
-      Connection conn = DriverManager.getConnection(myUrl, "distribuido", "password");
+      Connection conn = DriverManager.getConnection(myUrl, "distribuido", "");
       String data[] = new String [10];
       
       // our SQL SELECT query. 
