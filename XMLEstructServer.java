@@ -1,41 +1,99 @@
 import XmlFinal.*;
-import org.omg.CosNaming.*;
-import org.omg.CosNaming.NamingContextPackage.*;
-import org.omg.CORBA.*;
-import org.omg.PortableServer.*;
-import org.omg.PortableServer.POA;
 
+import XmlFinal.*;
+import java.io.*;
+import java.io.*;
+import java.io.*;
+import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.*;
-import java.io.*;
+import java.util.Properties;
+import javax.servlet.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-
-import java.util.Properties;
-
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.List;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Menu;
-
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
-
-import org.w3c.dom.*;
-import java.io.*;
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.ParserConfigurationException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Text;
+import org.omg.CORBA.*;
+import org.omg.CORBA.*;
+import org.omg.CosNaming.*;
+import org.omg.CosNaming.*;
+import org.omg.CosNaming.NamingContextPackage.*;
+import org.omg.PortableServer.*;
+import org.omg.PortableServer.POA;
+import org.omg.PortableServer.POA;
+import org.w3c.dom.*;
+import org.w3c.dom.*;
 import org.xml.sax.SAXException;
+import java.io.*;
+import java.io.FileOutputStream;
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.servlet.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.Table;
+import org.omg.CosNaming.*;
+import org.omg.CosNaming.NamingContextPackage.*;
+import org.omg.PortableServer.POA;
+import org.xml.sax.SAXException;
+import org.omg.PortableServer.POA;
+
+import java.io.*;
+
+
+import org.eclipse.swt.widgets.Table;
+
+import org.eclipse.swt.events.SelectionAdapter;
+
+import javax.xml.parsers.DocumentBuilder;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 class XMLEstructImpl extends XMLEstructPOA{
   private ORB orb;
@@ -62,54 +120,54 @@ class XMLEstructImpl extends XMLEstructPOA{
     String pathF = file+"\\"+fileName;
     System.out.println( "VAl: "+ pathF );
     try{
-        File xmlDocument = new File(pathF);
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-      	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-      	Document doc = dBuilder.parse(xmlDocument);
-      	doc.getDocumentElement().normalize();
-        System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-        NodeList nList = doc.getElementsByTagName("author");
+      File xmlDocument = new File(pathF);
+      DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+      DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+      Document doc = dBuilder.parse(xmlDocument);
+      doc.getDocumentElement().normalize();
+      System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+      NodeList nList = doc.getElementsByTagName("author");
 
-	for (int temp = 0; temp < nList.getLength(); temp++) {
-		Node nNode = nList.item(temp);
-		System.out.println("\nCurrent Element :" + nNode.getNodeName());
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
+      for (int temp = 0; temp < nList.getLength(); temp++) {
+        Node nNode = nList.item(temp);
+        System.out.println("\nCurrent Element :" + nNode.getNodeName());
+        if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+          Element eElement = (Element) nNode;
 
-      String myDriver = "org.gjt.mm.mysql.Driver";
-      String myUrl = "jdbc:mysql://localhost:3306/distribuido";
-      Class.forName("com.mysql.jdbc.Driver").newInstance();
-      Connection conn = DriverManager.getConnection(myUrl, "root", "");
-      Statement st = conn.createStatement();
-      String q = "INSERT INTO authors ( first_name, last_name, email, birthdate, added, category ) values( ?, ?, ?, ?, NOW(), ? )";
-      PreparedStatement prep = conn.prepareStatement(q);
-      prep.setString(1, eElement.getElementsByTagName("first_name").item(0).getTextContent());
-      prep.setString(2, eElement.getElementsByTagName("last_name").item(0).getTextContent());
-      prep.setString(3, eElement.getElementsByTagName("email").item(0).getTextContent());
-      prep.setString(4, eElement.getElementsByTagName("birthday").item(0).getTextContent());
-      prep.setString(5, eElement.getElementsByTagName("category").item(0).getTextContent());
+          String myDriver = "org.gjt.mm.mysql.Driver";
+          String myUrl = "jdbc:mysql://localhost:3306/distribuido";
+          Class.forName("com.mysql.jdbc.Driver").newInstance();
+          Connection conn = DriverManager.getConnection(myUrl, "root", "");
+          Statement st = conn.createStatement();
+          String q = "INSERT INTO authors ( first_name, last_name, email, birthdate, added, category ) values( ?, ?, ?, ?, NOW(), ? )";
+          PreparedStatement prep = conn.prepareStatement(q);
+          prep.setString(1, eElement.getElementsByTagName("first_name").item(0).getTextContent());
+          prep.setString(2, eElement.getElementsByTagName("last_name").item(0).getTextContent());
+          prep.setString(3, eElement.getElementsByTagName("email").item(0).getTextContent());
+          prep.setString(4, eElement.getElementsByTagName("birthday").item(0).getTextContent());
+          prep.setString(5, eElement.getElementsByTagName("category").item(0).getTextContent());
 
-      prep.execute();
+          prep.execute();
 
-			System.out.println("First Name : " + eElement.getElementsByTagName("first_name").item(0).getTextContent());
-			System.out.println("Last Name : " + eElement.getElementsByTagName("last_name").item(0).getTextContent());
-			System.out.println("Email : " + eElement.getElementsByTagName("email").item(0).getTextContent());
-			System.out.println("Birthday : " + eElement.getElementsByTagName("birthday").item(0).getTextContent());
-			System.out.println("Category : " + eElement.getElementsByTagName("category").item(0).getTextContent());
-      if( this.obs != null ){
-        this.obs.setText( "Nuevo autor agregado -  " + eElement.getElementsByTagName("first_name").item(0).getTextContent() + " " +   eElement.getElementsByTagName("last_name").item(0).getTextContent() );
-        this.total.setText( getTotal() );
-        this.list.setItems( getXML() );
+          System.out.println("First Name : " + eElement.getElementsByTagName("first_name").item(0).getTextContent());
+          System.out.println("Last Name : " + eElement.getElementsByTagName("last_name").item(0).getTextContent());
+          System.out.println("Email : " + eElement.getElementsByTagName("email").item(0).getTextContent());
+          System.out.println("Birthday : " + eElement.getElementsByTagName("birthday").item(0).getTextContent());
+          System.out.println("Category : " + eElement.getElementsByTagName("category").item(0).getTextContent());
+          if( this.obs != null ){
+            this.obs.setText( "Nuevo autor agregado -  " + eElement.getElementsByTagName("first_name").item(0).getTextContent() + " " +   eElement.getElementsByTagName("last_name").item(0).getTextContent() );
+            this.total.setText( getTotal() );
+            this.list.setItems( getXML() );
+          }
+        }
       }
-		}
-	}
 
     }catch(Exception e){
       e.printStackTrace();
     }
-  //  XE excel = new XE();
-  //  excel.generateExcel(xmlDocument);
-  //  System.out.println( file );
+    //  XE excel = new XE();
+    //  excel.generateExcel(xmlDocument);
+    //  System.out.println( file );
 
     return "Hello world !!\n";
   }
@@ -139,7 +197,7 @@ class XMLEstructImpl extends XMLEstructPOA{
   public String[] getXML() {
     String[] dataa = new String [20];
     for( int i = 0; i < 20; i++ )
-      dataa[i] = "";
+    dataa[i] = "";
 
     try{
       String myDriver = "org.gjt.mm.mysql.Driver";
@@ -167,32 +225,141 @@ class XMLEstructImpl extends XMLEstructPOA{
     return data;*/
   }
 
-  public String getXMLDetail( String name ) {
-    String dataa = "";
-    try{
-      String myDriver = "org.gjt.mm.mysql.Driver";
-      String myUrl = "jdbc:mysql://localhost:3306/distribuido";
-      Class.forName("com.mysql.jdbc.Driver").newInstance();
-      Connection conn = DriverManager.getConnection(myUrl, "root", "");
-      String query = "SELECT concat(first_name, ' ', last_name ) nombre, email, birthdate, added, category FROM authors where concat(first_name, ' ', last_name ) = ?";
-      PreparedStatement prep = conn.prepareStatement(query);
-      prep.setString(1, name);
+  public synchronized  String getXMLDetail( String name ) {
+    String dataa ="";
+    if( name.equals("data") ){
+      try{
 
-      ResultSet rs = prep.executeQuery();
-      while( rs.next() ){
-        dataa = rs.getString("nombre") + " - " +  rs.getString("email") +
-                "\n Cumpleanos " + rs.getString("birthdate") +
-                "\n Subido el " + rs.getString("added") +
-                "\n Escribe sobre " + rs.getString("category")
-        ;
+        String myDriver = "org.gjt.mm.mysql.Driver";
+        String myUrl = "jdbc:mysql://localhost:3306/distribuido";
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        Connection conn = DriverManager.getConnection(myUrl, "root", "");
+        String query = "SELECT concat(first_name, ' ', last_name ) nombre, email, birthdate, added, category FROM authors";
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(query);
+        while( rs.next() ){
+          dataa += rs.getString("nombre") + "," +  rs.getString("email") + ","
+          + rs.getString("birthdate") + "," + rs.getString("added") +
+          "," + rs.getString("category") + ";"
+          ;
+        }
+        st.close();
+        return  dataa;
+      }catch (Exception e){
+        System.err.println("Got an exception! ");
+        System.err.println(e.getMessage());
+        dataa = e.getMessage();
       }
-      prep.close();
-      return   dataa;
-    }catch (Exception e){
-      System.err.println("Got an exception! ");
-      System.err.println(e.getMessage());
     }
-    return "Error :c" + dataa;
+
+    if( name.equals("misterio") ){
+      try{
+
+        String myDriver = "org.gjt.mm.mysql.Driver";
+        String myUrl = "jdbc:mysql://localhost:3306/distribuido";
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        Connection conn = DriverManager.getConnection(myUrl, "root", "");
+        String query = "SELECT concat(first_name, ' ', last_name ) nombre, email, birthdate, added, category FROM authors where category = 'Misterio'";
+        Statement st = conn.createStatement();
+
+        ResultSet rs = st.executeQuery(query);
+        while( rs.next() ){
+          dataa += rs.getString("nombre") + "," +  rs.getString("email") + ","
+          + rs.getString("birthdate") + "," + rs.getString("added") +
+          "," + rs.getString("category") + ";"
+          ;
+        }
+        st.close();
+        return  dataa;
+      }catch (Exception e){
+        System.err.println("Got an exception! ");
+        System.err.println(e.getMessage());
+        dataa = e.getMessage();
+      }
+    }
+
+    if( name.equals("amor") ){
+      try{
+
+        String myDriver = "org.gjt.mm.mysql.Driver";
+        String myUrl = "jdbc:mysql://localhost:3306/distribuido";
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        Connection conn = DriverManager.getConnection(myUrl, "root", "");
+        String query = "SELECT concat(first_name, ' ', last_name ) nombre, email, birthdate, added, category FROM authors where category = 'Amor'";
+        Statement st = conn.createStatement();
+
+        ResultSet rs = st.executeQuery(query);
+        while( rs.next() ){
+          dataa += rs.getString("nombre") + "," +  rs.getString("email") + ","
+          + rs.getString("birthdate") + "," + rs.getString("added") +
+          "," + rs.getString("category") + ";"
+          ;
+        }
+        st.close();
+        return  dataa;
+      }catch (Exception e){
+        System.err.println("Got an exception! ");
+        System.err.println(e.getMessage());
+        dataa = e.getMessage();
+      }
+    }
+
+    if( name.equals("aventura") ){
+      try{
+
+        String myDriver = "org.gjt.mm.mysql.Driver";
+        String myUrl = "jdbc:mysql://localhost:3306/distribuido";
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        Connection conn = DriverManager.getConnection(myUrl, "root", "");
+        String query = "SELECT concat(first_name, ' ', last_name ) nombre, email, birthdate, added, category FROM authors where category = 'Aventura'";
+        Statement st = conn.createStatement();
+
+        ResultSet rs = st.executeQuery(query);
+        while( rs.next() ){
+          dataa += rs.getString("nombre") + "," +  rs.getString("email") + ","
+          + rs.getString("birthdate") + "," + rs.getString("added") +
+          "," + rs.getString("category") + ";"
+          ;
+        }
+        st.close();
+        return  dataa;
+      }catch (Exception e){
+        System.err.println("Got an exception! ");
+        System.err.println(e.getMessage());
+        dataa = e.getMessage();
+      }
+    }
+
+
+    if( name != "data" ){
+      try{
+        String myDriver = "org.gjt.mm.mysql.Driver";
+        String myUrl = "jdbc:mysql://localhost:3306/distribuido";
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        Connection conn = DriverManager.getConnection(myUrl, "root", "");
+        String query = "SELECT concat(first_name, ' ', last_name ) nombre, email, birthdate, added, category FROM authors where concat(first_name, ' ', last_name ) = ?";
+        PreparedStatement prep = conn.prepareStatement(query);
+        prep.setString(1, name);
+
+        ResultSet rs = prep.executeQuery();
+        while( rs.next() ){
+          dataa = rs.getString("nombre") + " - " +  rs.getString("email") +
+          "\n Cumpleanos " + rs.getString("birthdate") +
+          "\n Subido el " + rs.getString("added") +
+          "\n Escribe sobre " + rs.getString("category")
+          ;
+        }
+        prep.close();
+        return   dataa;
+      }catch (Exception e){
+        System.err.println("Got an exception! ");
+        System.err.println(e.getMessage());
+      }
+      return "Error :c" + dataa;
+    }
+
+
+    return dataa;
   }
   public void shutdown(){
     orb.shutdown(false);
@@ -202,7 +369,7 @@ class XMLEstructImpl extends XMLEstructPOA{
 public class XMLEstructServer {
   protected Shell shell;
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException  {
     try {
       ORB orb = ORB.init(args, null);
       POA rootpoa = POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
@@ -270,11 +437,12 @@ public class XMLEstructServer {
     total.setText( datax.getTotal() );
 
     loadData.addSelectionListener( new SelectionAdapter(){
-       @Override
-       public void widgetSelected(SelectionEvent arg0) {
+      @Override
+      public void widgetSelected(SelectionEvent arg0) {
         total.setText( datax.getTotal() );
         list.setItems( datax.getXML() );
-       }
+        System.out.println( datax.getXMLDetail("data"));
+      }
     });
 
     Label observable = new Label(shell,  SWT.CENTER );
